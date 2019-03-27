@@ -1,0 +1,8 @@
+27-03-19 10:37 =           C1: 20V,10A      Ps: 1V,2A      Liftup: 6V,7A      liftdown: 3V,5A      Tiltup: 2V,3A      Tiltdown: 7V,2A
+27-03-19 10:37 =           C1: 20V,10A      Ps: 1V,2A      Liftup: 6V,7A      liftdown: 3V,5A      Tiltup: 2V,3A      Tiltdown: 7V,2A
+27-03-19 10:37 =           C1: 20V,10A      Ps: 1V,2A      Liftup: 6V,7A      liftdown: 3V,5A      Tiltup: 2V,3A      Tiltdown: 7V,2A
+27-03-19 10:37 =           C1: 20V,10A      Ps: 1V,2A      Liftup: 6V,7A      liftdown: 3V,5A      Tiltup: 2V,3A      Tiltdown: 7V,2A
+27-03-19 10:37 =           C1: 20V,10A      Ps: 1V,2A      Liftup: 6V,7A      liftdown: 3V,5A      Tiltup: 2V,3A      Tiltdown: 7V,2A
+27-03-19 10:37 =           C1: 20V,10A      Ps: 1V,2A      Liftup: 6V,7A      liftdown: 3V,5A      Tiltup: 2V,3A      Tiltdown: 7V,2A
+27-03-19 10:37 =           C1: 20V,10A      Ps: 1V,2A      Liftup: 6V,7A      liftdown: 3V,5A      Tiltup: 2V,3A      Tiltdown: 7V,2A
+27-03-19 10:37 =           C1: 20V,10A      Ps: 1V,2A      Liftup: 6V,7A      liftdown: 3V,5A      Tiltup: 2V,3A      Tiltdown: 7V,2A

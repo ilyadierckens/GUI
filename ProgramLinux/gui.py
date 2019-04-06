@@ -1290,6 +1290,7 @@ class ProgramLogic():
 		global webconchecked
 		if (webconchecked == 0):
 			webconchecked = 1
+
 		else:
 			webconchecked = 0
 
@@ -1324,6 +1325,8 @@ class ProgramLogic():
 
 		if (savem == 0):
 			write.drawbar()
+			web = QtGui.QIcon("pictures/webserver.png");
+			bwebserver.setIcon(web)
 			savem = 1
 
 		else:
@@ -1344,6 +1347,8 @@ class ProgramLogic():
 				ip = subprocess.check_output(["cut", "-c3-15", "ip.txt"])
 				ip = ip.decode('ascii')
 
+				web = QtGui.QIcon("pictures/webserverac.png");
+				bwebserver.setIcon(web)
 				QMessageBox.about(w, "Info", "Connect to:  " + str(ip))
 			else:
 				QMessageBox.about(w, "Error", "Measurement saving is turned on")
@@ -2099,11 +2104,21 @@ class Window():
 		bsavemeting.resize(300,30)
 		bsavemeting.hide()
 
-		bwebserver = QCheckBox("Start webserver",w)
-		bwebserver.stateChanged.connect(ProgramLogic.startwebserver)
-		bwebserver.move(490,435)
-		bwebserver.setStyleSheet("font-family: Arial; font-size: 15px;")
-		bwebserver.resize(300,30)
+	#	bwebserver = QCheckBox("Start webserver",w)
+	#	bwebserver.stateChanged.connect(ProgramLogic.startwebserver)
+	#	bwebserver.move(490,435)
+	#	bwebserver.setStyleSheet("font-family: Arial; font-size: 15px;")
+	#	bwebserver.resize(300,30)
+	#	bwebserver.hide()
+
+		web = QtGui.QIcon("pictures/webserver.png");
+		bwebserver = QtWidgets.QPushButton(w)
+		bwebserver.clicked.connect(ProgramLogic.startwebserver)
+		bwebserver.resize(70,70)
+		bwebserver.move(714,410)
+		bwebserver.setIcon(web)
+		bwebserver.setIconSize(QtCore.QSize(70,70))
+		bwebserver.setStyleSheet("border: none;")
 		bwebserver.hide()
 
 

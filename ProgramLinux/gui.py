@@ -1312,10 +1312,10 @@ class ProgramLogic():
 	def savemetingchange():
 		global savem
 		if (savem == 0):
-			savem == 1
+			savem = 1
 
 		else:
-			savem == 0
+			savem = 0
 
 class Window():
 

@@ -2058,7 +2058,7 @@ class Window():
 
 		bsavemeting = QCheckBox("Save metingen in text bestand",w)
 		bsavemeting.stateChanged.connect(ProgramLogic.savemetingchange)
-		bsavemeting.move(225,410)
+		bsavemeting.move(225,415)
 		bsavemeting.setStyleSheet("font-family: Arial; font-size: 15px;")
 		bsavemeting.resize(300,30)
 		bsavemeting.hide()

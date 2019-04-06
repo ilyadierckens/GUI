@@ -1210,13 +1210,13 @@ class ProgramLogic():
 				else:
 					lconc2.setText("GUI program update [OK]")
 					conclusiony = 2
-					lconc2.show()
-					lconc2.hide()
+
 
 				lconc1.hide()
 				lconc1.show()
-				lconc2.show()
+
 				lconc2.hide()
+				lconc2.show()
 
 
 			else:
@@ -2058,7 +2058,7 @@ class Window():
 
 		bsavemeting = QCheckBox("Save metingen in text bestand",w)
 		bsavemeting.stateChanged.connect(ProgramLogic.savemetingchange)
-		bsavemeting.move(225,380)
+		bsavemeting.move(225,410)
 		bsavemeting.setStyleSheet("font-family: Arial; font-size: 15px;")
 		bsavemeting.resize(300,30)
 		bsavemeting.hide()

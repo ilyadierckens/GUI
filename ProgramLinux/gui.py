@@ -4,6 +4,7 @@ from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QSlider
 from PyQt5.QtWidgets import QMessageBox
 from PyQt5.QtWidgets import QCheckBox
+from PyQt5.QtWidgets import QPlainTextEdit
 from PyQt5 import QtGui
 from PyQt5 import QtCore
 from PyQt5.QtCore import Qt
@@ -14,6 +15,7 @@ import subprocess
 import update
 import write
 import os
+from unidecode import unidecode
 
 
 #### 		Variabelen creëren en default 0 maken 		###
@@ -169,10 +171,11 @@ class PiLogic():
 
 	def pineutralon():
 		GPIO.output(3,GPIO.LOW)
+		print("nothing")
 
 	def pineutraloff():
 		GPIO.output(3,GPIO.HIGH)
-
+		print("nothing")
 
 
 
@@ -253,6 +256,8 @@ class ProgramLogic():
 		l4thV.hide()
 		l4thA.hide()
 		bsavemeting.hide()
+		bwebserver.hide()
+
 
 
 		if (p1pressed == 1):
@@ -485,6 +490,7 @@ class ProgramLogic():
 			ptiltdownon.hide()
 
 		bsavemeting.show()
+		bwebserver.show()
 		bnexthomepage.show()
 
 	def hidepage_one_1():
@@ -527,6 +533,7 @@ class ProgramLogic():
 		ptiltdownon.hide()
 
 		bsavemeting.hide()
+		bwebserver.hide()
 		bnexthomepage.hide()
 
 	def showpage_one_2():
@@ -1314,16 +1321,43 @@ class ProgramLogic():
 
 	def savemetingchange():
 		global savem
+
 		if (savem == 0):
+			write.drawbar()
 			savem = 1
 
 		else:
+			write.drawbar()
 			savem = 0
+
+
+
+	def startwebserver():
+		if (webconchecked == 1):
+			if (savem == 0):
+				copy = subprocess.call(["sudo", "cp" , "-v" , "/home/pi/ProgramLinux/metingen.txt" , "/var/www/html"])
+				ipraw = subprocess.check_output(["hostname", "-I"]).strip()
+				text_file = open("ip.txt" , "a")
+				text_file.write(str(ipraw))
+				text_file.close()
+
+				ip = subprocess.check_output(["cut", "-c3-15", "ip.txt"])
+				ip = ip.decode('ascii')
+
+				QMessageBox.about(w, "Info", "Connect to:  " + str(ip))
+			else:
+				QMessageBox.about(w, "Error", "Measurement saving is turned on")
+		else:
+			QMessageBox.about(w, "Error", "No internet connection found")
+
+
+
+	def shutdown():
+		shutdown = subprocess.call(["sudo" , "shutdown" ,  "-h" , "now"])
 
 class Window():
 
 	def __init__(self):								# Setup bij het opstarten
-
 
 
 
@@ -1828,6 +1862,8 @@ class Window():
 		global p4thoff
 
 		global bsavemeting
+		global bwebserver
+
 
 		global bnexthomepage
 		global bpreviousehome
@@ -2058,10 +2094,17 @@ class Window():
 
 		bsavemeting = QCheckBox("Save metingen in text bestand",w)
 		bsavemeting.stateChanged.connect(ProgramLogic.savemetingchange)
-		bsavemeting.move(225,420)
+		bsavemeting.move(225,435)
 		bsavemeting.setStyleSheet("font-family: Arial; font-size: 15px;")
 		bsavemeting.resize(300,30)
 		bsavemeting.hide()
+
+		bwebserver = QCheckBox("Start webserver",w)
+		bwebserver.stateChanged.connect(ProgramLogic.startwebserver)
+		bwebserver.move(490,435)
+		bwebserver.setStyleSheet("font-family: Arial; font-size: 15px;")
+		bwebserver.resize(300,30)
+		bwebserver.hide()
 
 
 		###		next page button 	###
@@ -2933,7 +2976,7 @@ class Window():
 			b5.setStyleSheet(fh.read())
 
 		bexit = QtWidgets.QPushButton(w)						# Exit knop
-		bexit.clicked.connect(w.close)
+		bexit.clicked.connect(ProgramLogic.shutdown)
 		bexit.setText("Exit")
 		bexit.resize(150,35)
 		bexit.move(25,430)

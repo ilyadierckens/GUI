@@ -12,6 +12,7 @@ import RPi.GPIO as GPIO
 import time
 import subprocess
 import update
+import write
 import os
 
 
@@ -68,6 +69,7 @@ vieuwn = 0
 webconchecked = 0
 backgroundn = 0
 infopagen = 0
+savem = 0
 
 
 
@@ -249,6 +251,7 @@ class ProgramLogic():
 		p4thoff.hide()
 		l4thV.hide()
 		l4thA.hide()
+		bsavemeting.hide()
 
 
 		if (p1pressed == 1):
@@ -480,6 +483,7 @@ class ProgramLogic():
 			ptiltdownoff.show()
 			ptiltdownon.hide()
 
+		bsavemeting.show()
 		bnexthomepage.show()
 
 	def hidepage_one_1():
@@ -521,6 +525,7 @@ class ProgramLogic():
 		ltiltdownA.hide()
 		ptiltdownon.hide()
 
+		bsavemeting.hide()
 		bnexthomepage.hide()
 
 	def showpage_one_2():
@@ -1217,7 +1222,7 @@ class ProgramLogic():
 		else:
 			QMessageBox.about(w, "Error", "No internet connection found")
 
-	
+
 
 	def updatepi():
 
@@ -1304,6 +1309,13 @@ class ProgramLogic():
 			b5.setStyleSheet(fbutton)
 			backgroundn = 0
 
+	def savemetingchange():
+		global savem
+		if (savem == 0):
+			savem == 1
+
+		else:
+			savem == 0
 
 class Window():
 
@@ -1336,7 +1348,7 @@ class Window():
 
 		Window.home_page(self)								# Verwijzen naar body functie
 
-		def xchange():											# Functie die variable x laat updaten
+		def change():											# Functie die variable x laat updaten
 
 			global gloeilampohm
 
@@ -1561,8 +1573,11 @@ class Window():
 				p4thoff.hide()
 				p4thon.hide()
 
+			if (savem == 1):
+				write.updatemetingen(c1V,c1A,psV,psA,liftupV,liftupA,tiltupV,tiltupA,liftdownV,liftdownA,tiltdownV,tiltdownA,V3rdV,A3rdA,V4thV,A4thA)
+
 		timer= QtCore.QTimer()									# Om de 0,1 seconden laat het programma de functie xchange lopen
-		timer.timeout.connect(xchange)
+		timer.timeout.connect(change)
 		timer.start(1000)
 
 		sys.exit(app.exec_())									# Applicatie sluiten
@@ -1809,6 +1824,8 @@ class Window():
 		global p4thon
 		global p4thoff
 
+		global bsavemeting
+
 		global bnexthomepage
 		global bpreviousehome
 
@@ -2034,6 +2051,14 @@ class Window():
 		l4thA.move(350,355)
 		l4thA.setStyleSheet("font: Arial; font-size: 18px;")
 		l4thA.hide()
+
+
+		bsavemeting = QCheckBox("Save metingen in text bestand",w)
+		bsavemeting.stateChanged.connect(ProgramLogic.savemetingchange)
+		bsavemeting.move(225,320)
+		bsavemeting.setStyleSheet("font-family: Arial; font-size: 15px;")
+		bsavemeting.resize(300,30)
+		bsavemeting.hide()
 
 		###		next page button 	###
 		next = QtGui.QIcon("pictures/next.png");

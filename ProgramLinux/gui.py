@@ -21,6 +21,7 @@ import os
 global webconchecked
 global backgroundn
 global infopagen
+global savem
 
 x = 0
 bseatp = 0
@@ -1209,6 +1210,8 @@ class ProgramLogic():
 				else:
 					lconc2.setText("GUI program update [OK]")
 					conclusiony = 2
+					lconc2.show()
+					lconc2.hide()
 
 				lconc1.hide()
 				lconc1.show()
@@ -2055,10 +2058,11 @@ class Window():
 
 		bsavemeting = QCheckBox("Save metingen in text bestand",w)
 		bsavemeting.stateChanged.connect(ProgramLogic.savemetingchange)
-		bsavemeting.move(225,320)
+		bsavemeting.move(225,380)
 		bsavemeting.setStyleSheet("font-family: Arial; font-size: 15px;")
 		bsavemeting.resize(300,30)
 		bsavemeting.hide()
+
 
 		###		next page button 	###
 		next = QtGui.QIcon("pictures/next.png");

@@ -1596,7 +1596,7 @@ class Window():
 					tiltuplower80 = 0
 
 			else:
-				if (tiltupdownV > 0):
+				if (tiltupV > 0):
 					tiltupV = tiltupV - 1
 				else:
 					tiltuplower80 = 1
@@ -1636,7 +1636,7 @@ class Window():
 					tiltdownV = tiltdownV - 1
 				else:
 					tiltdownlower80 = 1
-					
+
 			ltiltdownV.setText(str(tiltdownV) + "V")
 			ltiltdownV.resize(500, 30)
 			if (tiltdownV < 10):

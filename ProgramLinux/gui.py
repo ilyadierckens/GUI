@@ -1417,7 +1417,21 @@ class Window():
 
 
 			### C1 ###
-			c1V = c1V + 1
+			if (c1Vlower80 == 1):
+				if (c1V < 80):
+					c1V = c1V + 1
+				else:
+					c1Vlower80 == 0
+					c1Vhiger80 == 1
+
+			if (c1Vhiger80 == 1):
+				if (c1V > 0):
+					c1V = c1V - 1
+				else:
+					c1Vlower80 == 1
+					c1Vhiger80 == 0
+
+
 			lc1V.setText(str(c1V) + "V")
 			lc1V.resize(500, 30)
 			if (c1V < 10):

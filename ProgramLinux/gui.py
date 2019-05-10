@@ -1661,8 +1661,18 @@ class Window():
 				ptiltdownon.hide()
 
 		### 3rd ###
+			if (rduplower80 == 1):
+ 				if (V3rdV < 80):
+ 					V3rdV = V3rdV + 1
+ 				else:
+ 					rduplower80 = 0
 
-			V3rdV = V3rdV + 1
+			else:
+ 				if (V3rdV > 0):
+ 					V3rdV = V3rdV - 1
+ 				else:
+ 					rduplower80 = 1
+
 			l3rdV.setText(str(V3rdV) + "V")
 			l3rdV.resize(500, 30)
 			if (V3rdV < 10):
@@ -1686,14 +1696,25 @@ class Window():
 				p3rdoff.hide()
 				p3rdon.hide()
 
+			if (thuplower80 == 1):
+ 				if (V4thV < 80):
+ 					V4thV = V4thV + 1
+ 				else:
+ 					thuplower80 = 0
 
-			V4thV = V4thV + 1
+			else:
+ 				if (V4thV > 0):
+ 					V4thV = V4thV - 1
+ 				else:
+ 					thuplower80 = 1
+
+
 			l4thV.setText(str(V4thV) + "V")
 			l4thV.resize(500, 30)
 			if (V4thV < 10):
-				l4thV.move(355,340)
+				l4thV.move(385,340)
 			else:
-				l4thV.move(345,340)
+				l4thV.move(375,340)
 
 			A4thA = V4thV/gloeilampohm
 			A4thA = "%.3f" % A4thA

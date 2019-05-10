@@ -1431,6 +1431,12 @@ class Window():
 			global pslower80
 			global liftuplower80
 			global liftdownlower80
+			global tiltuplower80
+			global tiltdownlower80
+			global rduplower80
+			global rddownlower80
+			global thuplower80
+			global thdownlower80
 
 			### C1 ###
 			if (c1lower80 == 1):
@@ -1583,7 +1589,18 @@ class Window():
 				pliftupon.hide()
 
 			### Tilt up ###
-			tiltupV = tiltupV + 1
+			if (tiltuplower80 == 1):
+				if (tiltupV < 80):
+					tiltupV = tiltupV + 1
+				else:
+					tiltuplower80 = 0
+
+			else:
+				if (tiltupdownV > 0):
+					tiltupV = tiltupV - 1
+				else:
+					tiltuplower80 = 1
+
 			ltiltupV.setText(str(tiltupV) + "V")
 			ltiltupV.resize(500, 30)
 			if (tiltupV < 10):
@@ -1608,7 +1625,18 @@ class Window():
 				ptiltupon.hide()
 
 			### Tilt down ###
-			tiltdownV = tiltdownV + 1
+			if (tiltdownlower80 == 1):
+				if (tiltdownV < 80):
+					tiltdownV = tiltdownV + 1
+				else:
+					tiltdownlower80 = 0
+
+			else:
+				if (tiltdownV > 0):
+					tiltdownV = tiltdownV - 1
+				else:
+					tiltdownlower80 = 1
+					
 			ltiltdownV.setText(str(tiltdownV) + "V")
 			ltiltdownV.resize(500, 30)
 			if (tiltdownV < 10):

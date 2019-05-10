@@ -15,7 +15,7 @@ import subprocess
 import update
 import write
 import os
-from unidecode import unidecode
+
 
 
 #### 		Variabelen creëren en default 0 maken 		###
@@ -85,35 +85,36 @@ class PiLogic():
 	GPIO.setmode(GPIO.BCM)		#
 
 		# GPIO pinnen als uitgang  #
-	GPIO.setup(1,GPIO.OUT)
 	GPIO.setup(2,GPIO.OUT)
 	GPIO.setup(3,GPIO.OUT)
 	GPIO.setup(4,GPIO.OUT)
 	GPIO.setup(5,GPIO.OUT)
 	GPIO.setup(6,GPIO.OUT)
-	GPIO.setup(12,GPIO.OUT)
+	GPIO.setup(13,GPIO.OUT)
+	GPIO.setup(19,GPIO.OUT)
+	GPIO.setup(26,GPIO.OUT)
 
 
 
 	def piseatbelt():				#	SeatbeltSwitch relais activeren/deactiveren
 		global sb
 		if (sb == 0):
-			GPIO.output(1,GPIO.HIGH)
+			GPIO.output(26,GPIO.HIGH)
 			sb = 1
 
 
 		else:
-			GPIO.output(1,GPIO.LOW)
+			GPIO.output(26,GPIO.LOW)
 			sb = 0
 
 	def pibrake():					# 	BrakeSwitch relais activeren/deactiveren
 		global bb
 		if (bb == 0):
-			GPIO.output(2 , GPIO.HIGH)
+			GPIO.output(5 , GPIO.HIGH)
 			bb = 1
 
 		else:
-			GPIO.output(2,GPIO.LOW)
+			GPIO.output(5,GPIO.LOW)
 			bb = 0
 
 	def pihorn():					#	HornSwitch relais activeren/deactiveren
@@ -127,55 +128,58 @@ class PiLogic():
 	def piseat():					#	SeatSwitch relais activeren/deactiveren
 		global se
 		if (se == 0):
-			GPIO.output(4,GPIO.HIGH)
+			GPIO.output(3,GPIO.HIGH)
 			se = 1
 
 		else:
-			GPIO.output(4,GPIO.LOW)
+			GPIO.output(3,GPIO.LOW)
 			se = 0
 
 	def piparking():				#	ParkingBreak relais activeren/deactiveren
 		global pe
 		if (pe == 0):
-			GPIO.output(5,GPIO.HIGH)
+			GPIO.output(4,GPIO.HIGH)
 			pe = 1
 
 		else:
-			GPIO.output(5,GPIO.LOW)
+			GPIO.output(4,GPIO.LOW)
 			pe = 0
 
 	def pifluid():					#	BrakeFluidSwitch relais activeren/deactiveren
 		global fl
 		if (fl == 0):
-			GPIO.output(6,GPIO.HIGH)
+			GPIO.output(2,GPIO.HIGH)
 			fl = 1
 
 		else:
-			GPIO.output(6,GPIO.LOW)
+			GPIO.output(2,GPIO.LOW)
 			fl = 0
 
 	def piforwardon():
-		GPIO.output(12,GPIO.HIGH)
+		GPIO.output(6,GPIO.HIGH)
 		PiLogic.pineutralon()
 
 	def piforwardoff():
-		GPIO.output(12,GPIO.LOW)
+		GPIO.output(6,GPIO.LOW)
 		PiLogic.pineutralon()
 
 	def pireverseon():
-		GPIO.output(12,GPIO.LOW)
-		PiLogic.pineutraloff()
+		#GPIO.output(13,GPIO.HIGH)
+		#PiLogic.pineutraloff()
+		PiLogic.piforwardon()
 
 	def pireverseoff():
-		PiLogic.pineutralon()
+		#PiLogic.pineutralon()
+		#GPIO.output(13,GPIO.LOW)
+		PiLogic.piforwardoff()
 
 	def pineutralon():
-		GPIO.output(3,GPIO.LOW)
-		print("nothing")
+		GPIO.output(19,GPIO.LOW)
+
 
 	def pineutraloff():
 		GPIO.output(3,GPIO.HIGH)
-		print("nothing")
+
 
 
 
@@ -1340,7 +1344,7 @@ class ProgramLogic():
 			if (savem == 0):
 				copy = subprocess.call(["sudo", "cp" , "-v" , "/home/pi/ProgramLinux/metingen.txt" , "/var/www/html"])
 				ipraw = subprocess.check_output(["hostname", "-I"]).strip()
-				text_file = open("ip.txt" , "a")
+				text_file = open("ip.txt" , "w")
 				text_file.write(str(ipraw))
 				text_file.close()
 

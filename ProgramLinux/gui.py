@@ -74,6 +74,8 @@ backgroundn = 0
 infopagen = 0
 savem = 0
 
+c1Vhiger80 = 0
+c1Vlower80 = 1
 
 
 
@@ -1421,15 +1423,14 @@ class Window():
 				if (c1V < 80):
 					c1V = c1V + 1
 				else:
-					c1Vlower80 == 0
-					c1Vhiger80 == 1
+					c1Vlower80 = 0
 
-			if (c1Vhiger80 == 1):
+			else:
 				if (c1V > 0):
 					c1V = c1V - 1
 				else:
-					c1Vlower80 == 1
-					c1Vhiger80 == 0
+					c1Vlower80 = 1
+
 
 
 			lc1V.setText(str(c1V) + "V")

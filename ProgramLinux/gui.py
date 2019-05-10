@@ -1429,6 +1429,8 @@ class Window():
 
 			global c1lower80
 			global pslower80
+			global liftuplower80
+			global liftdownlower80
 
 			### C1 ###
 			if (c1lower80 == 1):
@@ -1507,7 +1509,18 @@ class Window():
 
 
 			### Lift up ###
-			liftupV = liftupV + 1
+			if (liftuplower80 == 1):
+				if (liftupV < 80):
+					liftupV = liftupV + 1
+				else:
+					liftuplower80 = 0
+
+			else:
+				if (liftupV > 0):
+					liftupV = liftupV - 1
+				else:
+					liftuplower80 = 1
+
 			lliftupV.setText(str(liftupV) + "V")
 			lliftupV.resize(500, 30)
 			if (liftupV < 10):
@@ -1532,7 +1545,20 @@ class Window():
 				pliftupon.hide()
 
 			### Lift down ###
-			liftdownV = liftdownV + 1
+			if (liftdownlower80 == 1):
+				if (liftdownV < 80):
+					liftdownV = liftdownV + 1
+				else:
+					liftdownlower80 = 0
+
+			else:
+				if (liftdownV > 0):
+					liftdownV = liftdownV - 1
+				else:
+					liftdownlower80 = 1
+
+
+
 			lliftdownV.setText(str(liftdownV) + "V")
 			lliftdownV.resize(500, 30)
 			if (liftdownV < 10):

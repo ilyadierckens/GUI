@@ -74,8 +74,18 @@ backgroundn = 0
 infopagen = 0
 savem = 0
 
-c1Vhiger80 = 0
-c1Vlower80 = 1
+
+
+c1lower80 = 1
+pslower80 = 1
+liftuplower80 = 1
+liftdownlower80 = 1
+tiltuplower80 = 1
+tiltdownlower80 = 1
+rduplower80 = 1
+rddownlower80 = 1
+thuplower80 = 1
+thdownlower80 = 1
 
 
 
@@ -1417,19 +1427,21 @@ class Window():
 			global V4thV
 			global A4thA
 
+			global c1lower80
+			global pslower80
 
 			### C1 ###
-			if (c1Vlower80 == 1):
+			if (c1lower80 == 1):
 				if (c1V < 80):
 					c1V = c1V + 1
 				else:
-					c1Vlower80 = 0
+					c1lower80 = 0
 
 			else:
 				if (c1V > 0):
 					c1V = c1V - 1
 				else:
-					c1Vlower80 = 1
+					c1lower80 = 1
 
 
 
@@ -1458,7 +1470,18 @@ class Window():
 				pc1on.hide()
 
 			### Ps/c ###
-			psV = psV + 1
+			if (pslower80 == 1):
+				if (psV < 80):
+					psV = psV + 1
+				else:
+					pslower80 = 0
+
+			else:
+				if (psV > 0):
+					psV = psV - 1
+				else:
+					pslower80 = 1
+
 			lpsV.setText(str(psV) + "V")
 			lpsV.resize(500, 30)
 			if (psV < 10):
@@ -1639,7 +1662,7 @@ class Window():
 
 		timer= QtCore.QTimer()									# Om de 0,1 seconden laat het programma de functie xchange lopen
 		timer.timeout.connect(change)
-		timer.start(1000)
+		timer.start(100)
 
 		sys.exit(app.exec_())									# Applicatie sluiten
 
